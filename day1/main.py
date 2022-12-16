@@ -2,11 +2,11 @@
 print('Advent of Code - Day 1')
 print("")
 
-input_file = './day1/input.txt'
+input_file: str = './day1/input.txt'
+top_n: int = 3
 
 inventories: list[list[int]] = []
-
-with open(input_file, newline='') as input:
+with open(input_file) as input:
     inventory: list[int] = []
     for line in input:
         value = line.strip()
@@ -24,17 +24,11 @@ for inventory in inventories:
     inventorySums.append(sum)
 
 elfWithtotal: list[tuple[int, int]] = list(enumerate(inventorySums))
-
 elfWithtotal.sort(reverse=True, key= lambda x: x[1])
 
-top = elfWithtotal[0:3]
-
 topSum = 0
-for elf, sum in top:
+for elf, sum in elfWithtotal[0:top_n]:
     topSum += sum
-    print(f"Elf {elf + 1} has {sum} calories!")
+    print(f"Elf {elf + 1} has {sum} calories")
 
-print(f"Their total is {topSum} calories!")
-
-# rb61 13:56 herfort
-# ic 2047 15:38 spoor 4 hannover
+print(f"Together they have {topSum} calories!")

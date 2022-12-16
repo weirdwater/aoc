@@ -13,6 +13,7 @@
 * Float is the return type of a division
 * Iterables can be mapped using a generator expression: `f(x) for x in list()`
 * To modify how an iterable is iterated through, you can write a custom iterator, or: Create a generator function (which uses yield in its body)
+* An Iterable has a `__next__` method, a container has `__getter__` and `__setter__` methods, and a Sequence has all three + `__len__`
 
 # Process
 

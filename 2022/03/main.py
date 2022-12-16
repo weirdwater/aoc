@@ -3,7 +3,7 @@ from typing import Sequence, Iterable, TypeVar
 print('Advent of Code - Day 3')
 print("")
 
-input_file: str = './day3/input.txt'
+input_file: str = './2022/03/input.txt'
 
 item_priority = {
     'a': 1,

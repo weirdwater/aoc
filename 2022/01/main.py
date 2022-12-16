@@ -2,7 +2,7 @@
 print('Advent of Code - Day 1')
 print("")
 
-input_file: str = './day1/input.txt'
+input_file: str = './2022/01/input.txt'
 top_n: int = 3
 
 inventories: list[list[int]] = []

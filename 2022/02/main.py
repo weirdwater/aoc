@@ -3,7 +3,7 @@ from enum import Enum
 print('Advent of Code - Day 2')
 print("")
 
-input_file: str = './day2/input.txt'
+input_file: str = './2022/02/input.txt'
 
 # Score:
 #   + 1 for choosing Rock a/x

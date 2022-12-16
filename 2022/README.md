@@ -1,5 +1,11 @@
 
-# Python
+# AoC 2022
+
+Since I want a bit more experience with python I decided to do this year's AoC, in python. Definitely not because @ganzsz made me do it.
+
+## Lessons learned
+
+### Python
 
 * To read each line of a file as a string, use `with open (filename) as file:`
 * When reading each line in a file using `open` return characters can be stripped using `string.strip()` 
@@ -15,6 +21,6 @@
 * To modify how an iterable is iterated through, you can write a custom iterator, or: Create a generator function (which uses yield in its body)
 * An Iterable has a `__next__` method, a container has `__getter__` and `__setter__` methods, and a Sequence has all three + `__len__`
 
-# Process
+### Process
 
 * I found myself future proofing code, anticipating changes. But often they would make the program with the current goal more complex than needed.

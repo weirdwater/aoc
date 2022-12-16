@@ -10,3 +10,8 @@
 * Maps can be created using _dictionaries_ `{}`, very similar to JS objects. Added benefit: dictionaries have a .get method which allows you to safely access a member.
 * Python's type system has inference. Doing a None check results in the type changing
 * Enum members can have literal values
+* Float is the return type of a division
+
+# Process
+
+* I found myself future proofing code, anticipating changes. But often they would make the program with the current goal more complex than needed.

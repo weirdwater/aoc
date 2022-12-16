@@ -18,51 +18,58 @@ class Result(Enum):
     Draw = 3
     Lose = 0
 
-label_for_choice = {
-    'A': 'rock',
-    'B': 'paper',
-    'C': 'scissors',
-    'X': 'rock',
-    'Y': 'paper',
-    'Z': 'scissors',
+class Weapon(Enum):
+    Rock = 1
+    Paper = 2
+    Scissors = 3
+
+str_to_Weapon = {
+    'A': Weapon.Rock,
+    'B': Weapon.Paper,
+    'C': Weapon.Scissors
+}
+str_to_Result = {
+    'X': Result.Lose,
+    'Y': Result.Draw,
+    'Z': Result.Win
 }
 
-score_for_choice = {
-    'X': 1,
-    'Y': 2,
-    'Z': 3,
-}
-
-results_for_choice = {
-    'X': {
-        'A': Result.Draw,
-        'B': Result.Lose,
-        'C': Result.Win
+weapon_for_desired_result = {
+    Result.Lose: {
+        Weapon.Rock: Weapon.Scissors,
+        Weapon.Paper: Weapon.Rock,
+        Weapon.Scissors: Weapon.Paper
     },
-    'Y': {
-        'A': Result.Win,
-        'B': Result.Draw,
-        'C': Result.Lose
+    Result.Draw: {
+        Weapon.Rock: Weapon.Rock,
+        Weapon.Paper: Weapon.Paper,
+        Weapon.Scissors: Weapon.Scissors
     },
-    'Z': {
-        'A': Result.Lose,
-        'B': Result.Win,
-        'C': Result.Draw
+    Result.Win: {
+        Weapon.Rock: Weapon.Paper,
+        Weapon.Paper: Weapon.Scissors,
+        Weapon.Scissors: Weapon.Rock
     }
 }
 
 
-def calc_score(choice_player: str, choice_other: str) -> int:
-    base_score = score_for_choice.get(choice_player, 0)
-    result = results_for_choice.get(choice_player, {}).get(choice_other, Result.Lose)
-    return base_score + result.value
+def calc_score(desired_result: Result, choice_other: Weapon) -> int:
+    choice = weapon_for_desired_result[desired_result][choice_other]
+    result = desired_result.value + choice.value
+    print(f"The other chooses {choice_other}. We want to {desired_result}, respond with {choice}: {result}")
+    return result
+
 
 score = 0
 with open(input_file) as file:
     for line in file:
         other, player = line.strip().split(" ")
-        result = calc_score(player, other)
-        print(f"The other chooses {label_for_choice.get(other, 'unknown')}, respond with {label_for_choice.get(player, 'unkown')}: {result}")
-        score += result
+        choice_other: Weapon | None = str_to_Weapon.get(other)
+        desired_result: Result | None  = str_to_Result.get(player)
 
+        if (choice_other is not None and desired_result is not None):
+            result = calc_score(desired_result, choice_other)
+            score += result
+
+print("")
 print(f"Total score: {score}")

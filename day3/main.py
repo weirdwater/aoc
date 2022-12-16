@@ -1,3 +1,4 @@
+from typing import Sequence, Iterable, TypeVar
 
 print('Advent of Code - Day 3')
 print("")
@@ -59,22 +60,36 @@ item_priority = {
     'Z': 52,
 }
 
-def chars_in_common(left: str, right: str) -> set[str]:
-    chars: set[str] = set()
-    for c in left:
-        if (right.find(c) > -1):
-            chars.add(c)
-    return chars
+T = TypeVar("T")
+def paged(collection: Sequence[T], per_page: int) -> Iterable[Sequence[T]]:
+    page = 0
+    total_pages = int(collection.__len__() / per_page)
+    while (page < total_pages):
+        start = page * per_page
+        end = start + per_page
+        yield collection[start:end]
+        page += 1
 
-sum = 0
+sumMisplaced = 0
+rucksacks: list[str] = []
 with open(input_file) as file:
     for line in file:
         entry = line.strip()
         middle = int(entry.__len__() / 2)
         left = entry[0:middle]
         right = entry[middle:]
-        items = chars_in_common(left, right)
+        items = set(left).intersection(right)
         for item in items:
-            sum += item_priority.get(item, 0)
+            sumMisplaced += item_priority.get(item, 0)
+        rucksacks.append(entry)
 
-print(f"The total sum of priorities is {sum}")
+group_badges: list[str] = []
+for left, middle, right in paged(rucksacks, 3):
+    group = set(left).intersection(middle).intersection(right)
+    group_badges.append(group.pop())
+
+sumBadges = sum(item_priority.get(item, 0) for item in group_badges)
+
+print(f"The total sum of misplaced priorities is {sumMisplaced}")
+print(f"The total sum of badge priorities is {sumBadges}")
+

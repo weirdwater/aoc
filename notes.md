@@ -11,6 +11,8 @@
 * Python's type system has inference. Doing a None check results in the type changing
 * Enum members can have literal values
 * Float is the return type of a division
+* Iterables can be mapped using a generator expression: `f(x) for x in list()`
+* To modify how an iterable is iterated through, you can write a custom iterator, or: Create a generator function (which uses yield in its body)
 
 # Process
 
